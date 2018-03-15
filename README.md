@@ -1,7 +1,6 @@
 # Docker Puppeteer
 
-A Puppeteer Docker image based on the code here (Apache 2.0 license):
-https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker
+A Puppeteer Docker image based on [Puppeteer’s own recommendations](https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker).
 
 An example for how to use:
 
