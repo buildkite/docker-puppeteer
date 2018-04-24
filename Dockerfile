@@ -17,4 +17,4 @@ RUN  apt-get update \
      && apt-get install -y google-chrome-unstable --no-install-recommends \
      && rm -rf /var/lib/apt/lists/* \
      # Finally, install Puppeteer under /node_modules so it's available system-wide
-     && npm i puppeteer@1.1.1 
+     && npm i puppeteer@1.3.0
