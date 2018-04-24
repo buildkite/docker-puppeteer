@@ -1,6 +1,6 @@
 # Docker Puppeteer
 
-Node 8 + Puppeteer docker base image. Use it to add your own tools (such as a testing framework), configure any linked containers via your Docker Compose config, and run your Puppeteer scripts.
+A base image for running Puppeteer scripts. Add your own tools (such as Jest, Mocha, etc), link services you want to test via Docker Compose, and run your Puppeteer scripts with a headless Chromium.
 
 ## Usage example
 
