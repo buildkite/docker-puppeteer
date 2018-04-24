@@ -7,7 +7,7 @@ Node 8 + Puppeteer docker base image. Use it to add your own tools (such as a te
 Dockerfile.integration-tests:
 
 ```Dockerfile
-FROM buildkite/puppeteer:1.1.1
+FROM buildkite/puppeteer:1.3.0
 RUN  npm i mocha@5
 ENV  PATH="${PATH}:/node_modules/.bin"
 ```
