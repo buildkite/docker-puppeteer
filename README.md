@@ -7,8 +7,8 @@ A base image for running Puppeteer scripts. Add your own tools (such as Jest, Mo
 Dockerfile.integration-tests:
 
 ```Dockerfile
-FROM buildkite/puppeteer
-RUN  npm i mocha@5
+FROM buildkite/puppeteer:version
+RUN  npm i mocha
 ENV  PATH="${PATH}:/node_modules/.bin"
 ```
 
