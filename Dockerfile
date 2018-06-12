@@ -1,9 +1,9 @@
-# A minimal Docker image with Node 8 and Puppeteer
+# A minimal Docker image with Node and Puppeteer
 #
 # Based upon:
 # https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker
 
-FROM node:8-slim@sha256:c99b8bef61ac8185fdd15c189a0aa6e6d0e29d9c5c80ff05b804b76166b2fb40
+FROM node:10.4.0-slim
     
 RUN  apt-get update \
      # See https://crbug.com/795759
