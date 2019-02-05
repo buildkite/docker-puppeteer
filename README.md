@@ -84,5 +84,6 @@ describe('App', () => {
 Running:
 
 ```
+docker-compose -f docker-compose.integration-tests.yml build --pull
 docker-compose -f integration-tests run tests
 ```
