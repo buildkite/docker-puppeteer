@@ -9,7 +9,7 @@ See the list of [Docker Hub tags](https://hub.docker.com/r/buildkite/puppeteer/t
 Dockerfile.integration-tests:
 
 ```Dockerfile
-FROM buildkite/puppeteer:version
+FROM buildkite/puppeteer:latest
 RUN  npm i mocha
 ENV  PATH="${PATH}:/node_modules/.bin"
 ```
@@ -83,6 +83,7 @@ describe('App', () => {
 
 Running:
 
-```
-docker-compose -f integration-tests run tests
+```shell
+docker-compose -f docker-compose.integration-tests.yml run tests
+ls screenshots/
 ```
