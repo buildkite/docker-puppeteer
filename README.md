@@ -2,88 +2,14 @@
 
 A Node + Puppeteer base image for running Puppeteer scripts. Add your own tools (such as Jest, Mocha, etc), link services you want to test via Docker Compose, and run your Puppeteer scripts with a headless Chromium.
 
+## Versions
+
 See the list of [Docker Hub tags](https://hub.docker.com/r/buildkite/puppeteer/tags/) for Puppeteer versions available.
 
-## Usage example
+## Example
 
-Dockerfile.integration-tests:
+See the [example directory](example) for a complete Docker Compose example, showing how to run Puppeteer against a linked Docker Compose web service.
 
-```Dockerfile
-FROM buildkite/puppeteer:latest
-RUN  npm i mocha
-ENV  PATH="${PATH}:/node_modules/.bin"
-```
+## Dependent Services
 
-docker-compose.integration-tests.yml:
-
-```yml
-version: '3'
-services:
-  tests:
-    build:
-      context: .
-      dockerfile: Dockerfile.integration-tests
-    volumes:
-      - "./integration-tests:/integration-tests"
-      - "/screenshots"
-    command: mocha --recursive /integration-tests
-    links:
-      - app
-  app:
-    image: tutum/hello-world
-    expose:
-      - "80"
-```
-
-integration-tests/index.test.js:
-
-```js
-const assert = require('assert')
-const puppeteer = require('puppeteer')
-
-let browser
-let page
-
-before(async() => {
-  browser = await puppeteer.launch({
-    args: [
-      // Required for Docker version of Puppeteer
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      // This will write shared memory files into /tmp instead of /dev/shm,
-      // because Docker’s default for /dev/shm is 64MB
-      '--disable-dev-shm-usage'
-    ]
-  })
-
-  const browserVersion = await browser.version()
-  console.log(`Started ${browserVersion}`)
-})
-
-beforeEach(async() => {
-  page = await browser.newPage()
-})
-
-afterEach(async() => {
-  await page.close()
-})
-
-after(async() => {
-  await browser.close()
-})
-
-describe('App', () => {
-  it('renders', async() => {
-    const response = await page.goto('http://app/')
-    assert(response.ok())
-    await page.screenshot({ path: `/screenshots/app.png` })
-  })
-})
-```
-
-Running:
-
-```shell
-docker-compose -f docker-compose.integration-tests.yml run tests
-ls screenshots/
-```
+This image includes [wait-for-it.sh](https://github.com/vishnubob/wait-for-it) which can be useful if you need to wait for a dependent web service to start accepting requests before your Puppeteer container attempts connecting to it. See [the example](example) for usage.
