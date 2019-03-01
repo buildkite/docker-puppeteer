@@ -3,7 +3,7 @@
 # Based upon:
 # https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker
 
-FROM node:10.15.2-slim@sha256:bb63cf8a6b2437f16bad8735a3b162a6c3d3c40eab8db7da7c5c42a7bece92f6
+FROM node:10.15.2-slim@sha256:3b30ed2e1f11c998cacfc040a89aec4ca375c1415030f93507d60a6b97462a31
     
 RUN  apt-get update \
      # See https://crbug.com/795759
