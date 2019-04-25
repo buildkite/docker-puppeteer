@@ -34,7 +34,7 @@ after(async() => {
 
 describe('App', () => {
   it('renders', async() => {
-    const response = await page.goto('http://app/')
+    const response = await page.goto('http://web/')
     assert(response.ok())
     await page.screenshot({ path: `/screenshots/app.png` })
   })
