@@ -7,10 +7,10 @@ services:
     volumes:
       - "./integration-tests:/integration-tests"
       - "./screenshots:/screenshots"
-    command: "wait-for-it.sh app:80 -- mocha --recursive /integration-tests"
+    command: "wait-for-it.sh web:80 -- mocha --recursive /integration-tests"
     links:
-      - app
-  app:
+      - web
+  web:
     image: tutum/hello-world
     expose:
       - "80"
