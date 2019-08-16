@@ -3,7 +3,7 @@
 # Based upon:
 # https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker
 
-FROM node:10.16.2-slim@sha256:a3bbffd1c8b4fa8e8c63f610c31838c58c82e146a4aaf5739eaf331a33f630d0
+FROM node:10.16.3-slim@sha256:bebcd2be36fac28af2e804008868d2cdccb71b3bb726628941044c3f88a96daa
     
 RUN  apt-get update \
      # Install latest chrome dev package, which installs the necessary libs to
