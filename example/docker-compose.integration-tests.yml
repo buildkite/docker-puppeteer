@@ -8,7 +8,7 @@ services:
       - "./integration-tests:/integration-tests"
       - "./screenshots:/screenshots"
     command: "wait-for-it.sh web:80 -- mocha --recursive /integration-tests"
-    links:
+    depends_on:
       - web
   web:
     image: tutum/hello-world
