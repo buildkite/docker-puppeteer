@@ -1,0 +1,45 @@
+name: Publish to Docker Hub
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  IMAGE_NAME: puppeteer-alpine
+  DOCKER_REGISTRY: hub.docker.com
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [8, 10, 12, 13]
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Build image
+        run: |
+          export PUPPETEER_VERSION=$(node -p \
+            'require("$GITHUB_WORKSPACE/package.json").dependencies.puppeteer')
+          export FULL_IMAGE_NAME=\
+            $IMAGE_NAME:$PUPPETEER_VERSION-${{ matrix.node }}
+          docker build . --build-arg NODE_VERSION=${{ matrix.node }} \
+            -t $FULL_IMAGE_NAME
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "${{ matrix.node }}.x"
+      - name: Test image
+        run: |
+          export PUPPETEER_VERSION=$(node -p \
+            'require("$GITHUB_WORKSPACE/package.json").dependencies.puppeteer')
+          export FULL_IMAGE_NAME=\
+            $IMAGE_NAME:$PUPPETEER_VERSION-${{ matrix.node }}
+          docker run --rm -it -v $GITHUB_WORKSPACE/test:/tmp/test \
+            $FULL_IMAGE_NAME node /tmp/test/puppeteer.js
+      - name: Push image
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p \
+            ${{ secrets.DOCKER_PASSWORD }} $DOCKER_REGISTRY
+          docker push $FULL_IMAGE_NAME
