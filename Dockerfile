@@ -21,4 +21,10 @@ RUN apk add -q --update --no-cache \
 # Install Puppeteer under /node_modules so it's available system-wide
 ADD package.json package-lock.json /
 
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1
+
 RUN npm ci --silent
+
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+
+USER node
