@@ -1,7 +1,8 @@
-# A minimal Docker image with Node and Puppeteer
+# A minimal Docker image with Node and Puppeteer on Alpine Linux
 #
 # Based upon:
 # https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker
+# https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-on-alpine
 
 ARG NODE_VERSION
 
@@ -18,7 +19,6 @@ RUN apk add -q --update --no-cache \
       nodejs \
       yarn
 
-# Install Puppeteer under /node_modules so it's available system-wide
 ADD package.json package-lock.json /
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1
