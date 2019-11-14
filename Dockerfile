@@ -3,7 +3,9 @@
 # Based upon:
 # https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker
 
-FROM node:10.17.0-alpine
+ARG NODE_VERSION
+
+FROM node:${NODE_VERSION}-alpine
 
 RUN apk add -q --update --no-cache \
       chromium \
