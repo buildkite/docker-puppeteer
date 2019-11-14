@@ -21,4 +21,4 @@ RUN apk add -q --update --no-cache \
 # Install Puppeteer under /node_modules so it's available system-wide
 ADD package.json package-lock.json /
 
-RUN npm install
+RUN npm ci --silent
