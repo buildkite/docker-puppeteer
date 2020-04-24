@@ -1,0 +1,20 @@
+name: Build & Test
+
+on: [push, pull_request]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: docker build . --tag buildkite/puppeteer:latest
+    - name: Test
+      run: |
+        cd example
+        docker-compose -f docker-compose.integration-tests.yml build tests
+        docker-compose -f docker-compose.integration-tests.yml run tests
+        ls screenshots/app.png
