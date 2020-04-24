@@ -21,4 +21,4 @@ jobs:
     - uses: actions/upload-artifact@v1
       with:
         name: test-screenshot.png
-        path: screenshots/app.png
+        path: example/screenshots/app.png
