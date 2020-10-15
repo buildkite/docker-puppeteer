@@ -20,6 +20,17 @@ RUN  apt-get update \
      && wget --quiet https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh -O /usr/sbin/wait-for-it.sh \
      && chmod +x /usr/sbin/wait-for-it.sh
 
+# Chinese Fonts Support 
+RUN apt-get update \
+    && apt-get -y install fonts-droid-fallback ttf-wqy-zenhei ttf-wqy-microhei fonts-arphic-ukai fonts-arphic-uming \
+    && apt-get -y install fontconfig xfonts-utils
+
+WORKDIR /usr/share/fonts
+RUN mkfontscale \
+    && mkfontdir \
+    && fc-cache
+
 # Install Puppeteer under /node_modules so it's available system-wide
 ADD package.json package-lock.json /
+WORKDIR /
 RUN npm install
