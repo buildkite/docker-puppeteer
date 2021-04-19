@@ -21,6 +21,10 @@ jobs:
     strategy:
       matrix:
         node:
+          - 12.22-buster
+          - 12.22-buster-slim
+          - 12.22-stretch
+          - 12.22-stretch-slim
           - 14.16-buster
           - 14.16-buster-slim
           - 14.16-stretch
