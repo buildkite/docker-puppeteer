@@ -14,11 +14,22 @@ RUN  apt-get update \
      # Alternatively, we could could include the entire dep list ourselves
      # (https://github.com/puppeteer/puppeteer/blob/master/docs/troubleshooting.md#chrome-headless-doesnt-launch-on-unix)
      # but that seems too easy to get out of date.
-     && apt-get install -y google-chrome-stable \
+     && apt-get install -y libxss1 google-chrome-stable \
      && rm -rf /var/lib/apt/lists/* \
      && wget --quiet https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh -O /usr/sbin/wait-for-it.sh \
      && chmod +x /usr/sbin/wait-for-it.sh
 
+# Chinese Fonts Support 
+RUN apt-get update \
+    && apt-get -y install fonts-droid-fallback ttf-wqy-zenhei ttf-wqy-microhei fonts-arphic-ukai fonts-arphic-uming \
+    && apt-get -y install fontconfig xfonts-utils
+
+WORKDIR /usr/share/fonts
+RUN mkfontscale \
+    && mkfontdir \
+    && fc-cache
+
 # Install Puppeteer under /node_modules so it's available system-wide
 ADD package.json package-lock.json /
+WORKDIR /
 RUN npm install
