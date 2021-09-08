@@ -2,7 +2,7 @@
 
 ## Deprecated
 
-> buildkite/docker-puppeteer has been deprecated and no longer maintained.
+> We no longer use this image at Buildkite, and this repository and Docker image are no longer maintained. Please see [Puppeteer’s troubleshooting doc](https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md) for the latest information on running Puppeteer in Docker, or alternatively you can find [other pre-made images around GitHub](https://github.com/search?q=docker+puppeteer).
 
 ## Description
 
